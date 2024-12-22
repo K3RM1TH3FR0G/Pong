@@ -1,8 +1,8 @@
 import pygame
 from sys import exit
 from random import randint
-screenW = 1900
-screenH = 1000
+screenW = 800
+screenH = 500
 
 pygame.init()
 screen = pygame.display.set_mode((screenW, screenH))
@@ -106,6 +106,16 @@ while True:
     # Check for collision with the top and bottom of the screen
     if ball_y + ball_height >= screenH or ball_y <= 0:
         ball_speed_y *= -1
+    
+    #Check paddle collision with top and bottom of the screen
+    if paddle1_location <= 0:
+        paddle1_location = 0
+    elif paddle1_location >= screenH - paddle_size_y:
+        paddle1_location = screenH - paddle_size_y
+    if paddle2_location <= 0:
+        paddle2_location = 0
+    elif paddle2_location >= screenH - paddle_size_y:
+        paddle2_location = screenH - paddle_size_y
 
     # Check for collision with paddles
     if ball_x <= paddle1_x + paddle_size_x and paddle1_x + paddle_size_x <= ball_x and paddle1_location <= ball_y + ball_height and ball_y <= paddle1_location + paddle_size_y:
@@ -121,7 +131,7 @@ while True:
 
     #Paddles
     screen.blit(paddle1, (50, paddle1_location))
-    screen.blit(paddle2, (1830, paddle2_location))
+    screen.blit(paddle2, (screenW - 70, paddle2_location))
     screen.blit(ball, (ball_x, ball_y))
 
     pygame.display.update()
