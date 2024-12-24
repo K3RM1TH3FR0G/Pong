@@ -1,8 +1,8 @@
 import pygame
 from sys import exit
 from random import randint
-screenW = 800
-screenH = 500
+screenW = 1900
+screenH = 1000
 
 pygame.init()
 screen = pygame.display.set_mode((screenW, screenH))
@@ -56,7 +56,7 @@ ball_speed_x, ball_speed_y = ballstart()
 #Score
 score1 = 0
 score2 = 0
-font = pygame.font.Font(None, 600)
+font = pygame.font.Font(None, screenH//2)
 
 while True:
     for event in pygame.event.get():
