@@ -1,11 +1,14 @@
-import pygame
+import pygame, os
 from sys import exit
 from random import randint
-screenW = 1900
-screenH = 1000
 
 pygame.init()
-screen = pygame.display.set_mode((screenW, screenH))
+os.environ['SDL_VIDEO_CENTERED'] = '1'#Called before pygame.init() to center the window
+info = pygame.display.Info()#Called before set_mode to use the current monitor resolution
+screenW = info.current_w
+screenH = info.current_h
+#Set the screen size and title as well as made the screen fullscreen. 
+screen = pygame.display.set_mode((screenW, screenH), pygame.FULLSCREEN)
 pygame.display.set_caption("PONG")
 clock = pygame.time.Clock()
 
@@ -63,8 +66,13 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
+    
 
     keys = pygame.key.get_pressed()
+    #Closes the game with the escape key. 
+    if keys[pygame.K_ESCAPE]:
+        pygame.quit()
+        exit()
 
     #Left Paddle
     if keys[pygame.K_w]:
